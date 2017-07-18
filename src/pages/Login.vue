@@ -2,10 +2,10 @@
   <Card class="login-card">
     <Form>
       <Form-item>
-        <Input ></Input>
+        <Input placeholder="输入账号"></Input>
       </Form-item>
       <Form-item>
-        <Input ></Input>
+        <Input placeholder="输入密码"></Input>
       </Form-item>
       <Form-item>
         <Button type="success" long>登陆</Button>
