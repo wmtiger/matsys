@@ -12,6 +12,7 @@ export default new Router({
       redirect: to => {
         // todo: 这里要改成根据是否有user的token来判断重定向路径
         let test = (new Date().getTime()) % 2
+        test = 1
         console.log(test)
         if (test === 0) {
           return {path: '/login'}
