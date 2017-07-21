@@ -1,9 +1,9 @@
 import axios from 'axios'
 import pbjs from 'protobufjs'
 
-let proto = pbjs.loadSync('../protos/MessageVO.proto')
-let MessageVO = proto.build('com.gameabc.bfc.model.bto.MessageVO')
-let ParamVO = proto.build('com.gameabc.bfc.model.bto.ParamVO')
+var proto = pbjs.loadSync('../protos/MessageVO.proto')
+var MessageVO = proto.build('com.gameabc.bfc.model.bto.MessageVO')
+var ParamVO = proto.build('com.gameabc.bfc.model.bto.ParamVO')
 
 const AX = axios.create({
   baseURL: 'http://192.168.138.136:9095/',

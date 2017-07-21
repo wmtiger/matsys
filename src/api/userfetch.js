@@ -1,7 +1,8 @@
 import ax from '../common/ax'
 // import pbjs from 'protobufjs'
 
-export function login(nickName, password) {
+export function login (nickName, password) {
+  console.log(ax)
   ax({
     data: {action: 10, strValues: [nickName, password]}
   }).then(resp => {
@@ -11,7 +12,7 @@ export function login(nickName, password) {
   })
 }
 
-export function modifyPwd(oldPwd, newPwd) {
+export function modifyPwd (oldPwd, newPwd) {
   ax({
     data: {action: 1022, strValues: [oldPwd, newPwd]}
   }).then(resp => {
