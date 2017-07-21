@@ -2,13 +2,13 @@ import ax from '../common/ax'
 // import pbjs from 'protobufjs'
 
 export function login (nickName, password) {
-  console.log(ax)
+  console.log('ax', ax)
   ax({
     data: {action: 10, strValues: [nickName, password]}
   }).then(resp => {
-    console.log(resp)
+    console.log('resp', resp)
   }).catch(err => {
-    console.log(err)
+    console.log('err', err)
   })
 }
 

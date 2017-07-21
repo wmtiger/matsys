@@ -7,9 +7,9 @@
       <Form-item prop="pwd">
         <Input type="password" v-model="formValidate.pwd" placeholder="输入密码"></Input>
       </Form-item>
-      <!--<Form-item>-->
+      <Form-item>
       <Button long type="primary" @click="handleSubmit('formValidate')">登陆</Button>
-      <!--</Form-item>-->
+      </Form-item>
     </Form>
 
     <div class="login-footer">
@@ -39,6 +39,7 @@
     },
     methods: {
       handleSubmit (fv) {
+        console.log('fv')
         this.$refs[fv].validate((valid) => {
           if (valid) {
             login('jx', 'jx')

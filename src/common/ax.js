@@ -1,9 +1,17 @@
 import axios from 'axios'
 import pbjs from 'protobufjs'
 
-var proto = pbjs.loadSync('../protos/MessageVO.proto')
-var MessageVO = proto.build('com.gameabc.bfc.model.bto.MessageVO')
-var ParamVO = proto.build('com.gameabc.bfc.model.bto.ParamVO')
+var MessageVO// = proto.build('com.gameabc.bfc.model.bto.MessageVO')
+var ParamVO// = proto.build('com.gameabc.bfc.model.bto.ParamVO')
+pbjs.load('../../static/protos/MessageVO.proto', (err, data) => {
+  if (err) throw err
+  MessageVO = data.lookupType('com.gameabc.bfc.model.bto.MessageVO')
+  ParamVO = data.lookupType('com.gameabc.bfc.model.bto.ParamVO')
+  console.log(MessageVO)
+  console.log(ParamVO)
+})
+// var proto = pbjs.loadSync('../../static/protos/MessageVO.proto')
+// console.log(proto)
 
 const AX = axios.create({
   baseURL: 'http://192.168.138.136:9095/',
