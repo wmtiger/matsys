@@ -8,7 +8,7 @@
         <Input type="password" v-model="formValidate.pwd" placeholder="输入密码"></Input>
       </Form-item>
       <Form-item>
-      <Button long type="primary" @click="handleSubmit('formValidate')">登陆</Button>
+        <Button long type="primary" @click="handleSubmit('formValidate')">登陆</Button>
       </Form-item>
     </Form>
 
@@ -39,10 +39,14 @@
     },
     methods: {
       handleSubmit (fv) {
-        console.log('fv')
         this.$refs[fv].validate((valid) => {
           if (valid) {
-            login('jx', 'jx')
+            login('jx', 'jx').then((resp) => {
+              console.log('login resp', resp)
+              if (resp.data && resp.data.phase === 2) {
+                this.$router.push('/index')
+              }
+            })
           } else {
             this.$Message.error('验证不成功')
           }

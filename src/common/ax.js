@@ -1,17 +1,11 @@
 import axios from 'axios'
-import pbjs from 'protobufjs'
+import {pbjs, util} from 'protobufjs'
 
-var MessageVO// = proto.build('com.gameabc.bfc.model.bto.MessageVO')
-var ParamVO// = proto.build('com.gameabc.bfc.model.bto.ParamVO')
-pbjs.load('../../static/protos/MessageVO.proto', (err, data) => {
+var MessageVO
+pbjs.load('../../static/protos/MessageVO.proto', (err, root) => {
   if (err) throw err
-  MessageVO = data.lookupType('com.gameabc.bfc.model.bto.MessageVO')
-  ParamVO = data.lookupType('com.gameabc.bfc.model.bto.ParamVO')
-  console.log(MessageVO)
-  console.log(ParamVO)
+  MessageVO = root.lookupType('com.gameabc.bfc.model.bto.MessageVO')
 })
-// var proto = pbjs.loadSync('../../static/protos/MessageVO.proto')
-// console.log(proto)
 
 const AX = axios.create({
   baseURL: 'http://192.168.138.136:9095/',
@@ -21,38 +15,45 @@ const AX = axios.create({
   responseType: 'arraybuffer',
   transformRequest: [data => {
     // 对 data 进行任意转换处理
-    console.log(data)
-    let msg = new MessageVO()
-    msg.phase = 1
-    msg.action = data.action
-    let param = new ParamVO()
-    param.strValues = data.strValues
-    param.intValues = data.intValues
-    param.longValues = data.longValues
-    param.data = data.data
-    msg.data = param
+    let longs = []
+    if (data.longValues) {
+      let longLen = data.longValues.length
+      for (var i = 0; i < longLen; i++) {
+        longs[i] = pbjs.util.LongBits.fromNumber(data.longValues[i])
+      }
+    }
+    let pm = {
+      phase: 1,
+      action: data.action,
+      data: {
+        strValues: data.strValues,
+        intValues: data.intValues,
+        longValues: longs,
+        data: data.data
+      }
+    }
+    let merrMsg = MessageVO.verify(pm)
+    if (merrMsg) throw Error(merrMsg)
 
-    // 这里是自定的数据发送格式
-    let body = msg.toBuffer()
+    // 这里是自定的数据发送格式 [Uint8Array]
+    var body = MessageVO.encode(pm).finish()
     let len = body.byteLength
     let dv = new DataView(new ArrayBuffer(len + 4))
-    let bodyDv = new DataView(body)
     dv.setInt32(0, len, false)
     for (let i = 0; i < len; i++) {
-      dv.setUint8(i + 4, bodyDv.getUint8(i))
+      dv.setUint8(i + 4, body[i])
     }
     return dv.buffer
   }],
   transformResponse: [data => {
     // 对 data 进行任意转换处理
-    console.log(data)
     let dv = new DataView(data)
     let len = dv.getInt32(0, false)
-    let bodyDv = new DataView(new ArrayBuffer(len))
+    let bodyDv = new Uint8Array(new ArrayBuffer(len))
     for (let i = 0; i < len; i++) {
-      bodyDv.setUint8(i, dv.getUint8(i + 4))
+      bodyDv[i] = dv.getUint8(i + 4)
     }
-    return MessageVO.decode(bodyDv.buffer)
+    return MessageVO.decode(bodyDv)
   }]
 })
 

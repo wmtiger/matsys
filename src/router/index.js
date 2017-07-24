@@ -27,7 +27,7 @@ export default new Router({
     },
     {
       path: '/index',
-      component: resolve => require(['../components/topnav.vue'], resolve)
+      component: resolve => require(['../pages/index.vue'], resolve)
     }
   ]
 })

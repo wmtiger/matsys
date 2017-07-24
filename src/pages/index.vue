@@ -4,7 +4,17 @@
 </template>
 
 <script>
-  
+  import {getMyMenu} from '../api/menu.js'
+  export default {
+    data () {
+      return {
+      }
+    },
+    created () {
+      console.log('menu')
+      getMyMenu(8)
+    }
+  }
 </script>
 
 <style>
