@@ -1,11 +1,16 @@
 import axios from 'axios'
-import {pbjs, util} from 'protobufjs'
+import pbjs from 'protobufjs'
 
 var MessageVO
 pbjs.load('../../static/protos/MessageVO.proto', (err, root) => {
   if (err) throw err
   MessageVO = root.lookupType('com.gameabc.bfc.model.bto.MessageVO')
 })
+
+let a = pbjs.util.LongBits.fromNumber(222222222222222)
+console.log('aaaaa', a)
+console.log('a', a)
+console.log('aa', a.toNumber())
 
 const AX = axios.create({
   baseURL: 'http://192.168.138.136:9095/',
