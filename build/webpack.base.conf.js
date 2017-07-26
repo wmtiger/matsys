@@ -18,9 +18,9 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
-  // externals: {
-  //   'dcodeIO': 'dcodeIO',
-  // },
+  externals: {
+    'dcodeIO': 'dcodeIO',
+  },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {

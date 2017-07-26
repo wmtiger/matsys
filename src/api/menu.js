@@ -1,12 +1,8 @@
-import ax from '../common/ax'
+import ax from '../common/ax2'
 
-export function getMyMenu (uid) {
-  ax({
+export function getMyMenu () {
+  return ax({
     method: 'post',
-    data: {action: 1156, longValues: [uid]}
-  }).then(resp => {
-    console.log('getMyMenu resp', resp)
-  }).catch(err => {
-    console.log('getMyMenu err', err)
+    data: {action: 1156}
   })
 }

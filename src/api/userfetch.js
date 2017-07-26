@@ -1,9 +1,9 @@
-import ax from '../common/ax'
+import ax from '@/common/ax2'
 
 export function login (nickName, password) {
   return ax({
     method: 'post',
-    data: {action: 10, strValues: [nickName, password]}
+    data: { action: 10, data: { strValues: [nickName, password] } }
   })
   // ax({
   //   method: 'post',

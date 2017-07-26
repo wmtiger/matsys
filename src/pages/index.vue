@@ -12,7 +12,7 @@
     },
     created () {
       console.log('menu')
-      getMyMenu(8)
+      getMyMenu()
     }
   }
 </script>

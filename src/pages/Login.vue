@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import {login} from '../api/userfetch.js'
+  // import {login} from '../api/user.js'
   export default {
     data () {
       return {
@@ -41,12 +41,17 @@
       handleSubmit (fv) {
         this.$refs[fv].validate((valid) => {
           if (valid) {
-            login('jx', 'jx').then((resp) => {
-              console.log('login resp', resp)
-              if (resp.data && resp.data.phase === 2) {
-                this.$router.push('/index')
-              }
+            this.$store.dispatch('Login', this.formValidate).then(() => {
+              this.$router.push({ path: '/' })
+            }).catch(() => {
+              console.log('login err')
             })
+            // login('jx', 'jx').then((resp) => {
+            //   console.log('login resp', resp)
+            //   if (resp.data && resp.data.phase === 2) {
+            //     this.$router.push('/index')
+            //   }
+            // })
           } else {
             this.$Message.error('验证不成功')
           }
@@ -59,7 +64,7 @@
 <style scoped>
   .login-card {
     width: 320px;
-    margin: 0 auto;
+    margin: 60px auto;
   }
   .login-footer{
     margin-top: 10px;

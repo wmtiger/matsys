@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store'
 
 Vue.use(Router)
 
@@ -11,23 +12,25 @@ export default new Router({
       // component: resolve => require(['../pages/Login.vue'], resolve)
       redirect: to => {
         // todo: 这里要改成根据是否有user的token来判断重定向路径
-        let test = (new Date().getTime()) % 2
-        test = 0
-        console.log(test)
-        if (test === 0) {
-          return {path: '/login'}
-        } else {
+        let token = store.getters.token
+        if (token && token.length > 0) {
           return {path: '/index'}
+        } else {
+          return {path: '/login'}
         }
       }
     },
     {
       path: '/login',
-      component: resolve => require(['../pages/Login.vue'], resolve)
+      component: resolve => require(['@/pages/login.vue'], resolve)
     },
     {
       path: '/index',
-      component: resolve => require(['../pages/index.vue'], resolve)
-    }
+      component: resolve => require(['@/pages/index.vue'], resolve)
+    },
+    { path: '/404',
+      component: resolve => require(['@/pages/404.vue'], resolve)
+    },
+    { path: '*', redirect: '/404' }
   ]
 })
