@@ -1,17 +1,22 @@
 import axios from 'axios'
 import dcodeIO from 'dcodeIO'
 import store from '../store'
+import route from '../router'
+import {getVO} from './proto-vo.js'
 
 if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
   throw (new Error('ProtoBuf.js is not present. Please see www/index.html for manual setup instructions.'))
 }
 
-let ProtoBuf = dcodeIO.ProtoBuf
-let proto = ProtoBuf.loadProtoFile('../../static/protos/MessageVO.proto')
-let MessageVO = proto.build('com.gameabc.bfc.model.bto.MessageVO')
-let ParamVO = proto.build('com.gameabc.bfc.model.bto.ParamVO')
+// let ProtoBuf = dcodeIO.ProtoBuf
+// let proto = ProtoBuf.loadProtoFile('../../static/protos/MessageVO.proto')
+// let MessageVO = proto.build('com.gameabc.bfc.model.bto.MessageVO')
+// let ParamVO = proto.build('com.gameabc.bfc.model.bto.ParamVO')
 
 function initData (obj) {
+  let MessageVO = getVO('MessageVO')
+  let ParamVO = getVO('ParamVO')
+
   var msg = new MessageVO()
   msg.phase = 1
   msg.action = obj.action
@@ -28,6 +33,7 @@ function initData (obj) {
   return msg
 }
 
+console.log('process.env.BASE_API', process.env.BASE_API)
 var AX = axios.create({
   baseURL: process.env.BASE_API,
   url: '',
@@ -51,6 +57,8 @@ var AX = axios.create({
   }],
   transformResponse: [data => {
     // 对 data 进行任意转换处理
+    let MessageVO = getVO('MessageVO')
+
     let dv = new DataView(data)
     let len = dv.getInt32(0, false)
     let bodyDv = new DataView(new ArrayBuffer(len))
@@ -70,10 +78,11 @@ AX.interceptors.response.use(
     if (res.phase !== 2) {
       store.dispatch('FedLogOut').then(() => {
         // 为了重新实例化vue-router对象 避免bug
-        this.$router.push('/')
+        route.push('/')
+        return null
       })
     } else {
-      return response.data
+      return response
     }
   },
   error => {

@@ -4,7 +4,7 @@ import store from '@/store'
 
 Vue.use(Router)
 
-export default new Router({
+let route = new Router({
   mode: 'history',
   routes: [
     {
@@ -26,7 +26,7 @@ export default new Router({
     },
     {
       path: '/index',
-      component: resolve => require(['@/pages/index.vue'], resolve)
+      component: resolve => require(['@/pages/dashboard'], resolve)
     },
     { path: '/404',
       component: resolve => require(['@/pages/404.vue'], resolve)
@@ -34,3 +34,5 @@ export default new Router({
     { path: '*', redirect: '/404' }
   ]
 })
+
+export default route

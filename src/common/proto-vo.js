@@ -5,16 +5,30 @@ if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
 }
 
 let ProtoBuf = dcodeIO.ProtoBuf
-let proto = ProtoBuf.loadProtoFile('../../static/protos/MessageVO.proto')
-let MessageVO = proto.build('com.gameabc.bfc.model.bto.MessageVO')
-let ParamVO = proto.build('com.gameabc.bfc.model.bto.ParamVO')
+// let proto = ProtoBuf.loadProtoFile('../../static/protos/MessageVO.proto')
+// let MessageVO = proto.build('com.gameabc.bfc.model.bto.MessageVO')
+// let ParamVO = proto.build('com.gameabc.bfc.model.bto.ParamVO')
+
+let VOKEY = {
+  'MessageVO': 'com.gameabc.bfc.model.bto.MessageVO',
+  'ParamVO': 'com.gameabc.bfc.model.bto.ParamVO',
+  'MenuVO': 'com.gameabc.bfc.model.bto.manager.MenuVO'
+}
 
 let vo = {
-  MessageVO: 
 }
 
 /** 这里的voName必须和proto的名字相同 */
-function createVO(voName) {
+function createVO (voName) {
   let proto = ProtoBuf.loadProtoFile('../../static/protos/' + voName + '.proto')
-  vo[voName] = proto.build('com.gameabc.bfc.model.bto.MessageVO')
+  vo[voName] = proto.build(VOKEY[voName])
+}
+
+export function getVO (voName) {
+  if (!vo[voName]) {
+    console.log('have not', voName)
+    createVO(voName)
+  }
+  console.log('have', voName)
+  return vo[voName]
 }

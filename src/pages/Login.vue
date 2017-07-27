@@ -46,12 +46,6 @@
             }).catch(() => {
               console.log('login err')
             })
-            // login('jx', 'jx').then((resp) => {
-            //   console.log('login resp', resp)
-            //   if (resp.data && resp.data.phase === 2) {
-            //     this.$router.push('/index')
-            //   }
-            // })
           } else {
             this.$Message.error('验证不成功')
           }

@@ -1,0 +1,9 @@
+package com.gameabc.bfc.model.bto;
+option java_package = "com.gameabc.bfc.model.bto";
+option java_outer_classname = "ParamVO";
+message ParamVO  {
+  repeated string strValues = 1;
+  repeated int32 intValues = 2;
+  repeated int64 longValues = 3;
+  repeated bytes data = 4;
+}

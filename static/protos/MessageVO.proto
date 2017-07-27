@@ -1,4 +1,5 @@
 package com.gameabc.bfc.model.bto;
+import "ParamVO.proto";
 option java_package = "com.gameabc.bfc.model.bto";
 option java_outer_classname = "MessageProto";
 message MessageVO  {
@@ -13,11 +14,4 @@ message MessageVO  {
   optional bool isEncrypt = 9;
   optional string token = 10;
   optional int32 seqNum = 11;//
-}
-
-message ParamVO  {
-  repeated string strValues = 1;
-  repeated int32 intValues = 2;
-  repeated int64 longValues = 3;
-  repeated bytes data = 4;
 }
