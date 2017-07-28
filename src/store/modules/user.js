@@ -1,7 +1,6 @@
 import { login } from '@/api/user'
 import { getMyMenu } from '@/api/menu'
-import { setToken, removeToken } from '@/common/auth'
-// import { getToken, setToken, removeToken } from '@/common/auth'
+import { setToken, removeToken, setUserName, setUserPwd } from '@/common/auth'
 
 const user = {
   state: {
@@ -34,6 +33,8 @@ const user = {
             setToken(msg.token)
             commit('SET_TOKEN', msg.token)
             commit('SET_CLIENT_NUM_ID', msg.clientNumId)
+            setUserName(data.user)
+            setUserPwd(data.pwd)
             console.log('login success')
             resolve()
           }

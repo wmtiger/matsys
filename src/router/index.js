@@ -14,7 +14,7 @@ let route = new Router({
         // todo: 这里要改成根据是否有user的token来判断重定向路径
         let token = store.getters.token
         if (token && token.length > 0) {
-          return {path: '/index'}
+          return {path: '/dashboard'}
         } else {
           return {path: '/login'}
         }
@@ -25,8 +25,14 @@ let route = new Router({
       component: resolve => require(['@/pages/login.vue'], resolve)
     },
     {
-      path: '/index',
-      component: resolve => require(['@/pages/dashboard'], resolve)
+      path: '/dashboard',
+      component: resolve => require(['@/pages/dashboard'], resolve),
+      children: [
+        {
+          path: '/OperationLog',
+          component: resolve => require(['@/pages/log'], resolve)
+        }
+      ]
     },
     { path: '/404',
       component: resolve => require(['@/pages/404.vue'], resolve)

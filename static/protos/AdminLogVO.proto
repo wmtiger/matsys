@@ -1,0 +1,10 @@
+message AdminLogVO  {
+  optional int64 id = 1;
+  optional string content = 2;
+  optional string detail = 3;
+  optional int64  uid = 4;
+  optional string operator = 5;
+  optional string module = 6;
+  optional int64  gid = 7;
+  optional int64  createTime= 8;
+}

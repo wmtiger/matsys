@@ -1,8 +1,3 @@
-package com.gameabc.bfc.model.bto.manager;
-
-option java_package = "com.gameabc.bfc.model.bto.manager";
-option java_outer_classname = "MenuVO";
-
 message MenuVO  {
   optional int64 id = 1;
 	optional string menuName = 2; //安扭名称
@@ -10,4 +5,5 @@ message MenuVO  {
 	optional int32 menuAction = 4;//请求协义
 	optional int32 sort = 5;//安扭的位置排序
 	optional int32 isHidden = 6;//是不是显示
+	optional string name = 7;//
 }

@@ -22,13 +22,13 @@
 </template>
 
 <script>
-  // import {login} from '../api/user.js'
+  import { getUserName, getUserPwd } from '@/common/auth'
   export default {
     data () {
       return {
         formValidate: {
-          user: '',
-          pwd: ''
+          user: getUserName(),
+          pwd: getUserPwd()
         },
         ruleValidate: {
           user: [{required: true, message: '账号不能为空', trigger: 'blur'}],

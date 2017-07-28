@@ -1,17 +1,7 @@
 import axios from 'axios'
-import dcodeIO from 'dcodeIO'
 import store from '../store'
 import route from '../router'
 import {getVO} from './proto-vo.js'
-
-if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
-  throw (new Error('ProtoBuf.js is not present. Please see www/index.html for manual setup instructions.'))
-}
-
-// let ProtoBuf = dcodeIO.ProtoBuf
-// let proto = ProtoBuf.loadProtoFile('../../static/protos/MessageVO.proto')
-// let MessageVO = proto.build('com.gameabc.bfc.model.bto.MessageVO')
-// let ParamVO = proto.build('com.gameabc.bfc.model.bto.ParamVO')
 
 function initData (obj) {
   let MessageVO = getVO('MessageVO')
@@ -77,7 +67,6 @@ AX.interceptors.response.use(
     const res = response.data
     if (res.phase !== 2) {
       store.dispatch('FedLogOut').then(() => {
-        // 为了重新实例化vue-router对象 避免bug
         route.push('/')
         return null
       })
