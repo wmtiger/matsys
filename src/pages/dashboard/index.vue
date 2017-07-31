@@ -132,9 +132,9 @@
     padding: 10px 15px 0;
   }
   .layout-content {
-    min-height: 600px;
+    min-height: 400px;
     margin: 10px;
-    overflow: hidden;
+    overflow: auto;
     background: #fff;
     border-radius: 2px;
   }

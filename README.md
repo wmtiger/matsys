@@ -1,21 +1,29 @@
 # matsys
 
-> A Vue.js project
+> A Test project
+
+## 安装环境
+``` bash
+# 首先安装nodejs，下载msi，安装后，自动集成了npm! 注意环境变量
+# 先使用npm安装好vue和vue-cli以及yarn(这个是npm的替代品)
+npm i -g vue vue-cli yarn 
+
+```
 
 ## Build Setup
 
 ``` bash
 # install dependencies
-npm install
+yarn
 
 # serve with hot reload at localhost:8080
-npm run dev
+yarn run dev
 
 # build for production with minification
-npm run build
+yarn run build
 
 # build for production and view the bundle analyzer report
-npm run build --report
+# npm run build --report
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

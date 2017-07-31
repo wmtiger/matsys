@@ -31,6 +31,18 @@ let route = new Router({
         {
           path: '/OperationLog',
           component: resolve => require(['@/pages/log'], resolve)
+        },
+        {
+          path: '/User',
+          component: resolve => require(['@/pages/user'], resolve)
+        },
+        {
+          path: '/UserGroup',
+          component: resolve => require(['@/pages/usergroup'], resolve)
+        },
+        {
+          path: '/Menu',
+          component: resolve => require(['@/pages/menumgr'], resolve)
         }
       ]
     },

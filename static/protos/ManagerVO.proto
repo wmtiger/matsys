@@ -1,0 +1,9 @@
+message ManagerVO  {
+    optional int64 uid = 1;
+    optional string userName = 2;
+    optional string realName = 3;
+    optional string pwd = 4;
+    optional int64 gid = 5; //权限
+    optional int64 createTime = 6;
+    optional int64 modifyTime = 7;
+}
